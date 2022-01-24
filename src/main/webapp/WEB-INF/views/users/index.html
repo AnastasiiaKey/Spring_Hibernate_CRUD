@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:/thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+<style>
+    table {
+        width: 50%; /* Ширина таблицы */
+        background: white; /* Цвет фона таблицы */
+        color: black; /* Цвет текста */
+        border-spacing: 2px; /* Расстояние между ячейками */
+    }
+    td, th {
+        background: mediumaquamarine; /* Цвет фона ячеек */
+        padding: 5px; /* Поля вокруг текста */
+    }
+    .button {
+        background: mediumaquamarine;
+        text-decoration: none;
+        color: black;
+        padding: 0.5rem 0.5rem;
+    }
+    .center {
+        margin: 0 auto;
+        background: white;
+        color: black;
+        text-align: center;
+    }
+    </style>
+
+    </head>
+<body>
+<div>
+    <a class="button" href="/users/new">Create new user</a>
+    <p>
+</div>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Firstname</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>Options</th>
+    </tr>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td class="center" th:text="${user.getId()}"></td>
+        <td class="center" th:text="${user.getFirstName()}"></td>
+        <td class="center" th:text="${user.getLastName()}"></td>
+        <td class="center" th:text="${user.getEmail()}"></td>
+        <td class="center">
+            <a class="button" th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a>
+            <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}"> <button class="button" type="submit" value="Delete">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
